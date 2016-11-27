@@ -6,7 +6,7 @@ import os
 PORT = 8000
 #Port festlegen
 
-Handler = http.server.SimpleHTTPRequestHandler
+Handler = MyHandler.Handle(self)
 #Handler festlegen, welcher Anfragen bearbeitet<-Ersetzen
 #Start Konstruktor
 class MyHandler:
@@ -15,26 +15,26 @@ class MyHandler:
     #String spalten um Methode etc. zu bekommen
         string = self.request
     #string in Zeilen spalten
-        a = string.split('
+        zeilen = string.split('
                          ')
     #erste Zeile spalten und Variablen entnehmen
-        b = a[1]
-        c = b.split(' ')
-        Method = c[1]
-        Path = c[2]
+        zeile1 = zeilen[1]
+        parts1 = zeile1.split(' ')
+        Method = parts1[1]
+        Path = parts1[2]
     #zweite Zeile spalten
-        d = a[2]
-        e = d.split(':')
-        UserAgent = e[2]
+        zeile2 = zeilen[2]
+        parts2 = zeile2.split(':')
+        UserAgent = parts2[2]
     #Dritte Zeile spalten
-        f = a[3]
-        g = f.split(':')
-        Host = g[2]
+        zeile3 = zeilen[3]
+        parts3 = zeile3.split(':')
+        Host = parts3[2]
     #Methode testens
         if Method == "GET":
         #GET Methode verwenden
             #testfunktion ob file existiert
-            print(c[3] 200 OK
+            print(parts1[3] 200 OK
     Date: time.strftime(%a, %d %b %Y %H:%M:%S %Z)
     Server: Apache
     ...
