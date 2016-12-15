@@ -1,6 +1,8 @@
 import http.server
 import socketserver
 import os
+import requestparser.py
+import Testmethode.py
 #Bibliotheken importieren
 
 PORT = 8000
@@ -12,42 +14,8 @@ Handler = MyHandler.Handle(self)
 class MyHandler:
     #Allgemeine Variablen für den Handler kommen hier rein
     def Handle(self):
-    #String spalten um Methode etc. zu bekommen
-        string = self.request
-    #string in Zeilen spalten
-        zeilen = string.split('
-                         ')
-    #erste Zeile spalten und Variablen entnehmen
-        zeile1 = zeilen[1]
-        parts1 = zeile1.split(' ')
-        Method = parts1[1]
-        Path = parts1[2]
-    #zweite Zeile spalten
-        zeile2 = zeilen[2]
-        parts2 = zeile2.split(':')
-        UserAgent = parts2[2]
-    #Dritte Zeile spalten
-        zeile3 = zeilen[3]
-        parts3 = zeile3.split(':')
-        Host = parts3[2]
-    #Methode testens
-        if Method == "GET":
-        #GET Methode verwenden
-            #testfunktion ob file existiert
-            print(parts1[3] 200 OK
-    Date: time.strftime(%a, %d %b %Y %H:%M:%S %Z)
-    Server: Apache
-    ...
-    Content-Lenght:
-    ...
-    file Inhalt)
-        elif Method == "POST":
-        #POST Methode verwenden
-            # testfunktion ob file existiert
-
-        else:
-        #ERROR senden
-        
+    parse(self)
+    Testmethode(self)
         
             
 #Objekt Handler benutzt Methoden, etc. der Klasse MyHandler
