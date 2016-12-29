@@ -12,12 +12,14 @@ class responsebau:
             Content-Type: text/plain
             f.read())
             #rest der Get-Methode
-        catch:
+        except FileNotFoundError:
             #auf error-methoden umschalten
-            Errorresponse()
+            Errorresponse1()
     def Putresponse(self):
         f = open(path, w)
         #was schreiben? beim parser nicht sortiert für dictionary
         f.write()
 
+    def Errorresponse(self:
 
+    def Errorresponse1(self):
