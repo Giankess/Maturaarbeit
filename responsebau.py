@@ -1,4 +1,4 @@
-import requestparser.py
+import requestparser
 class responsebau:
     def Getresponse(self):
         try:
@@ -11,15 +11,13 @@ class responsebau:
             Content - Lenght: f.size
             Content-Type: text/plain
             f.read())
-            #rest der Get-Methode
         except FileNotFoundError:
-            #auf error-methoden umschalten
-            Errorresponse1()
+            #auf error-methoden umschalten wenn der Pfad nicht gefunden wird
+            Errorresponse()
     def Putresponse(self):
         f = open(path, w)
-        #was schreiben? beim parser nicht sortiert für dictionary
         f.write(Body)
-        #respnse erstellen
+        #response erstellen
         print(Version 201 Created
         Date: time.strftime( %a, %d %b %Y %H: %M: %S %Z)
         Host: Requestinhalt["Host"]
@@ -29,12 +27,14 @@ class responsebau:
         Content - Type: text/html
         f.read())
     def Errorresponse(self:
+        #Error bei nicht gefundener Datei
         print(Version 404 Not Found
         Date: time.strftime( %a, %d %b %Y %H: %M: %S %Z)
         Server: Python
         Host: Requestinhalt[Host]
         )
     def Errorresponse1(self):
+        #Error bei unbekannter Methode
         print(Version 501 Not Implemented
         Date: time.strftime( %a, %d %b %Y %H: %M: %S %Z)
         Server: Python

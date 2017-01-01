@@ -1,4 +1,5 @@
-import responsebau.py
+import responsebau
+import requestparser
 class Testmethode:
    def Testmethode(self):
        if Method == "GET":

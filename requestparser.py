@@ -1,6 +1,6 @@
 class requestparser:
-    def parse(self):
-        #string = self.request
+    def parse(request):
+        string = request
         # string in Zeilen spalten
         zeilen = string.split('\n')
         # erste Zeile spalten und Variablen entnehmen
@@ -11,14 +11,18 @@ class requestparser:
         #Version = parts[2]
         Requestinhalt = {}
         Body = ""
+        #alle Zeilen Parsen
         for zeile in zeilen:
             if ":" in zeile:
-                parts = zeile.split(':')
+                #Zeilen aus dem Header haben einen :
+                parts = zeile.split(': ')
                 Requestinhalt[parts[0]]=parts[1]
             elif "HTTP" in zeile:
+                #erste Zeile enthält http
                 parts = zeile.split(' ')
                 Method = parts[0]
                 Path = parts[1]
                 Version = parts[2]
             else:
+                #der Rest ist vom Body
                 Body = Body+zeile

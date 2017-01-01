@@ -1,8 +1,8 @@
 import http.server
 import socketserver
 import os
-import requestparser.py
-import Testmethode.py
+import requestparser
+import Testmethode
 #Bibliotheken importieren
 
 PORT = 8000
