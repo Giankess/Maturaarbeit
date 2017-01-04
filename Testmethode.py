@@ -1,7 +1,7 @@
 import responsebau
 import requestparser
 class Testmethode:
-   def Testmethode(self):
+   def Testmethode(Method):
        if Method == "GET":
            Getresponse()
        elif Method == "PUT":

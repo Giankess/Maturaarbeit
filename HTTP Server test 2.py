@@ -14,8 +14,13 @@ Handler = MyHandler.Handle(self)
 class MyHandler:
     #Allgemeine Variablen für den Handler kommen hier rein
     def Handle(self):
-    parse(self)
-    Testmethode(self)
+        while True:
+            data += self.request.recv()
+            if not data:
+                break
+            request += data
+        parse(request)
+        Testmethode(Method)
         
             
 #Objekt Handler benutzt Methoden, etc. der Klasse MyHandler

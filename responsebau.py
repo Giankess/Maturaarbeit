@@ -1,16 +1,17 @@
 import requestparser
+from time import *
 class responsebau:
     def Getresponse(self):
         try:
             f = open(path)
-            print(Version 200 OK
-            Date: time.strftime(%a, %d %b %Y %H: %M: %S %Z)
-            Host: Requestinhalt["Host"]
+            print(Version,""" 200 OK
+            Date: """,time.strftime("%a, %d %b %Y %H:%M:%S %Z", gmtime()),"""
+            Host: """,Requestinhalt['Host'],""""
             Server: Python
             Accept-Ranges: bytes
-            Content - Lenght: f.size
+            Content - Lenght: """,f.size,"""
             Content-Type: text/plain
-            f.read())
+            """,f.read())
         except FileNotFoundError:
             #auf error-methoden umschalten wenn der Pfad nicht gefunden wird
             Errorresponse()
@@ -18,25 +19,25 @@ class responsebau:
         f = open(path, w)
         f.write(Body)
         #response erstellen
-        print(Version 201 Created
-        Date: time.strftime( %a, %d %b %Y %H: %M: %S %Z)
-        Host: Requestinhalt["Host"]
+        print(Version,""" 201 Created
+        Date: """,time.strftime("%a, %d %b %Y %H:%M:%S %Z", gmtime()),"""
+        Host: """,Requestinhalt['Host'],"""
         Server: Python
         Accept - Ranges: bytes
-        Content - Lenght: f.size
+        Content - Lenght: """,f.size,"""
         Content - Type: text/html
-        f.read())
+        """,f.read())
     def Errorresponse(self:
         #Error bei nicht gefundener Datei
-        print(Version 404 Not Found
-        Date: time.strftime( %a, %d %b %Y %H: %M: %S %Z)
+        print(Version,""" 404 Not Found
+        Date: """,time.strftime("%a, %d %b %Y %H:%M:%S %Z", gmtime()),"""
         Server: Python
-        Host: Requestinhalt[Host]
-        )
+        Host: """,Requestinhalt['Host'],"""
+        """)
     def Errorresponse1(self):
         #Error bei unbekannter Methode
-        print(Version 501 Not Implemented
-        Date: time.strftime( %a, %d %b %Y %H: %M: %S %Z)
+        print(Version, """ 501 Not Implemented
+        Date: """,time.strftime("%a, %d %b %Y %H:%M:%S %Z", gmtime()),"""
         Server: Python
-        Host: Requestinhalt[Host]
-        )
+        Host: """,Requestinhalt['Host'],"""
+        """)

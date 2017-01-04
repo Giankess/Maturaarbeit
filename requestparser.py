@@ -25,4 +25,4 @@ class requestparser:
                 Version = parts[2]
             else:
                 #der Rest ist vom Body
-                Body = Body+zeile
+                Body += zeile
