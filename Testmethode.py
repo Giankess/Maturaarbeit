@@ -1,11 +1,11 @@
-import responsebau
-import requestparser
+from responsebau import *
 class Testmethode:
-   def Testmethode(Method):
-       if Method == "GET":
-           Getresponse()
-       elif Method == "PUT":
-           Putresponse()
-       else:
-           Errorresponse()
-
+    def Testmethode(self,ps):
+        rb = responsebau()
+        if ps.Method == "GET":
+            response = rb.Getresponse(ps)
+        elif ps.Method == "PUT":
+            response = rb.Putresponse(ps)
+        else:
+            response = rb.Errorresponse(ps)
+        return response

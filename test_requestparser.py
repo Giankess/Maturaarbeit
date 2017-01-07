@@ -1,4 +1,4 @@
-from requestparser import parse
+from requestparser import *
 testrequest = """POST /cgi-bin/process.cgi HTTP/1.1
 User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
 Host: www.tutorialspoint.com
@@ -10,7 +10,8 @@ Connection: Keep-Alive
 
 licenseID=string&content=string&/paramsXML=string"""
 
-parse(testrequest)
+ps = requestparser()
+ps.parse(testrequest)
 print(Version)
 print(Method)
 print(Path)

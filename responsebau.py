@@ -1,43 +1,38 @@
-import requestparser
-from time import *
+import time
 class responsebau:
-    def Getresponse(self):
+    Vorlage = ("""{version} {sc}
+        Date: {date}
+        Server: Python
+        Host: {host}
+        {rest}""")
+    Vorlage2 = """Accept-Ranges: bytes
+            Content - Lenght: {size}
+            Content-Type: {contenttype}
+            {file}"""
+    def Getresponse(self, ps):
         try:
-            f = open(path)
-            print(Version,""" 200 OK
-            Date: """,time.strftime("%a, %d %b %Y %H:%M:%S %Z", gmtime()),"""
-            Host: """,Requestinhalt['Host'],""""
-            Server: Python
-            Accept-Ranges: bytes
-            Content - Lenght: """,f.size,"""
-            Content-Type: text/plain
-            """,f.read())
+            f = open(ps.Path)
+            response = self.Vorlage.format(version = ps.Version, sc = "200 OK", date =\
+                time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = self.Vorlage2.format(size = ps.f.size, file = ps.f.read()), contenttype = ps.Requestinhalt['Content-Type'])
+            return response
         except FileNotFoundError:
             #auf error-methoden umschalten wenn der Pfad nicht gefunden wird
-            Errorresponse()
-    def Putresponse(self):
-        f = open(path, w)
+            request = self.Errorresponse(ps)
+            return request
+    def Putresponse(self, ps):
+        f = open(ps.Path, w)
         f.write(Body)
         #response erstellen
-        print(Version,""" 201 Created
-        Date: """,time.strftime("%a, %d %b %Y %H:%M:%S %Z", gmtime()),"""
-        Host: """,Requestinhalt['Host'],"""
-        Server: Python
-        Accept - Ranges: bytes
-        Content - Lenght: """,f.size,"""
-        Content - Type: text/html
-        """,f.read())
-    def Errorresponse(self:
+        request = self.Vorlage.format(version = ps.Version, sc = "201 Created", date =\
+            time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = self.Vorlage2.format(size = ps.f.size, file = ps.f.read()), contenttype = ps.Requestinhalt['Content-Type'])
+        return request
+    def Errorresponse(self, ps):
         #Error bei nicht gefundener Datei
-        print(Version,""" 404 Not Found
-        Date: """,time.strftime("%a, %d %b %Y %H:%M:%S %Z", gmtime()),"""
-        Server: Python
-        Host: """,Requestinhalt['Host'],"""
-        """)
-    def Errorresponse1(self):
+        request = self.Vorlage.format(version = ps.Version, sc = "404 Not Found", date =\
+            time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = "")
+        return request
+    def Errorresponse1(self, ps):
         #Error bei unbekannter Methode
-        print(Version, """ 501 Not Implemented
-        Date: """,time.strftime("%a, %d %b %Y %H:%M:%S %Z", gmtime()),"""
-        Server: Python
-        Host: """,Requestinhalt['Host'],"""
-        """)
+        request = self.Vorlage.format(version = ps.Version, sc = "501 Not Implemented", date =\
+            time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = "")
+        return request
