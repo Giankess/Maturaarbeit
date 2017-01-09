@@ -19,10 +19,10 @@ class httpHandler(socketserver.BaseRequestHandler):
             if not data:
                 break
             request += data
-        request = request.decode(ps.code)
+        request = request.decode(utf-8)
         ps.parse(request)
-        response = tm.Testmethode(ps)
-        response = response.encode(ps.code)
+        response = b""
+        response += tm.Testmethode(ps)
         self.request.sendall(response)
 
 httpd = socketserver.TCPServer(("localhost", PORT), httpHandler)

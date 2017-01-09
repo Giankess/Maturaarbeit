@@ -8,12 +8,16 @@ class responsebau:
     Vorlage2 = """Accept-Ranges: bytes
             Content - Lenght: {size}
             Content-Type: {contenttype}
-            {file}"""
+            """
     def Getresponse(self, ps):
         try:
             f = open(ps.Path)
             response = self.Vorlage.format(version = ps.Version, sc = "200 OK", date =\
-                time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = self.Vorlage2.format(size = ps.f.size, file = ps.f.read()), contenttype = ps.Requestinhalt['Content-Type'])
+                time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = self.Vorlage2.format(size = ps.f.size, contenttype = ps.Requestinhalt['Content-Type']))
+            file = ps.f.read()
+            file = file.encode(ps.code)
+            response = response.encode(utf - 8)
+            response += file
             return response
         except FileNotFoundError:
             #auf error-methoden umschalten wenn der Pfad nicht gefunden wird
@@ -23,9 +27,13 @@ class responsebau:
         f = open(ps.Path, w)
         f.write(Body)
         #response erstellen
-        request = self.Vorlage.format(version = ps.Version, sc = "201 Created", date =\
-            time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = self.Vorlage2.format(size = ps.f.size, file = ps.f.read()), contenttype = ps.Requestinhalt['Content-Type'])
-        return request
+        response = self.Vorlage.format(version = ps.Version, sc = "201 Created", date =\
+            time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = self.Vorlage2.format(size = ps.f.size, contenttype = ps.Requestinhalt['Content-Type']))
+        file = ps.f.read()
+        file = file.encode(ps.code)
+        response = response.encode(utf-8)
+        response += file
+        return response
     def Errorresponse(self, ps):
         #Error bei nicht gefundener Datei
         request = self.Vorlage.format(version = ps.Version, sc = "404 Not Found", date =\
