@@ -15,8 +15,8 @@ class responsebau:
             response = self.Vorlage.format(version = ps.Version, sc = "200 OK", date =\
                 time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = self.Vorlage2.format(size = ps.f.size, contenttype = ps.Requestinhalt['Content-Type']))
             file = ps.f.read()
-            file = file.encode(ps.code)
-            response = response.encode(utf - 8)
+            file = file.encode("'",ps.code,"'")
+            response = response.encode("UTF-8")
             response += file
             return response
         except FileNotFoundError:
@@ -30,17 +30,21 @@ class responsebau:
         response = self.Vorlage.format(version = ps.Version, sc = "201 Created", date =\
             time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = self.Vorlage2.format(size = ps.f.size, contenttype = ps.Requestinhalt['Content-Type']))
         file = ps.f.read()
-        file = file.encode(ps.code)
-        response = response.encode(utf-8)
+        file = file.encode("'",ps.code,"'")
+        response = response.encode("UTF-8")
         response += file
         return response
     def Errorresponse(self, ps):
         #Error bei nicht gefundener Datei
-        request = self.Vorlage.format(version = ps.Version, sc = "404 Not Found", date =\
+        response = self.Vorlage.format(version = ps.Version, sc = "404 Not Found", date =\
             time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = "")
-        return request
+        response = response.encode("UTF-8")
+        return response
     def Errorresponse1(self, ps):
         #Error bei unbekannter Methode
-        request = self.Vorlage.format(version = ps.Version, sc = "501 Not Implemented", date =\
+        response = self.Vorlage.format(version = ps.Version, sc = "501 Not Implemented", date =\
             time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = "")
-        return request
+        response = response.encode("UTF-8")
+        return response
+
+

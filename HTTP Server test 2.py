@@ -12,17 +12,18 @@ class httpHandler(socketserver.BaseRequestHandler):
     def handle(self):
         ps = requestparser()
         tm = Testmethode()
-        request = b""
+        request = b''
         while b'\r\n\r\n' not in request:
             data = self.request.recv(1024)
-            print(data)
             if not data:
                 break
             request += data
-        request = request.decode(utf-8)
+        request = request.decode("UTF-8")
+        print(request)
         ps.parse(request)
         response = b""
         response += tm.Testmethode(ps)
+        print(response)
         self.request.sendall(response)
 
 httpd = socketserver.TCPServer(("localhost", PORT), httpHandler)
