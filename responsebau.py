@@ -37,13 +37,17 @@ class responsebau:
     def Errorresponse(self, ps):
         #Error bei nicht gefundener Datei
         response = self.Vorlage.format(version = ps.Version, sc = "404 Not Found", date =\
-            time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = "")
+            time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = """<html><head><title>Not Found</title></head><body>
+Sorry, the object you requested was not found.
+</body><html>""")
         response = response.encode("UTF-8")
         return response
     def Errorresponse1(self, ps):
         #Error bei unbekannter Methode
         response = self.Vorlage.format(version = ps.Version, sc = "501 Not Implemented", date =\
-            time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = "")
+            time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = """<html><head><title>Not Found</title></head><body>
+Sorry, the object you requested was not found.
+</body><html>""")
         response = response.encode("UTF-8")
         return response
 

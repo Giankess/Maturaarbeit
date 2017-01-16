@@ -1,0 +1,13 @@
+<!Doctype html>
+<html>
+<head>
+	<title>Meine Website</title>
+</head>
+<body>
+	<h1>Klicke auf die Links unten</h1>
+	<a href="index.html">Home</a>
+	<a href="hello.html">Hello World</a>
+	<a href="picture.jpg">Bild</a>
+	<a href="file.css">CSS-File</a>
+</body>
+</html>
