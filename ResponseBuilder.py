@@ -13,8 +13,8 @@ class ResponseBuilder:
         try:
             f = open(ps.Path)
             response = self.Vorlage.format(version = ps.Version, sc = "200 OK", date =\
-                time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = self.Vorlage2.format(size = ps.f.size, contenttype = ps.Requestinhalt['Content-Type']))
-            file = ps.f.read()
+                time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = self.Vorlage2.format(size = f.size, contenttype = ps.Requestinhalt['Content-Type']))
+            file = f.read()
             file = file.encode("'",ps.code,"'")
             response = response.encode("UTF-8")
             response += file

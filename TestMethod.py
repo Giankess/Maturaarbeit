@@ -1,6 +1,6 @@
 from ResponseBuilder import *
-class TestMethod:
-    def TestMethode(self,ps):
+class Method:
+    def Methode(self,ps):
         rb = ResponseBuilder()
         if ps.Method == "GET":
             response = rb.Getresponse(ps)
