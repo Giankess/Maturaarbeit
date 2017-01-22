@@ -11,7 +11,7 @@ class httpHandler(socketserver.BaseRequestHandler):
     #Allgemeine Variablen für den Handler kommen hier rein
     def handle(self):
         ps = RequestParser()
-        tm = Method()
+        tm = SwitchMethod()
         request = b''
         while b'\r\n\r\n' not in request:
             data = self.request.recv(1024)
@@ -20,9 +20,9 @@ class httpHandler(socketserver.BaseRequestHandler):
             request += data
         request = request.decode("UTF-8")
         print(request)
-        ps.parse(request)
+        ps.Parse(request)
         response = b""
-        response += tm.Methode(ps)
+        response += tm.Switch(ps)
         print(response)
         self.request.sendall(response)
 

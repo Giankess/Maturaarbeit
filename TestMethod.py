@@ -1,6 +1,6 @@
 from ResponseBuilder import *
-class Method:
-    def Methode(self,ps):
+class SwitchMethod:
+    def Switch(self,ps):
         rb = ResponseBuilder()
         if ps.Method == "GET":
             response = rb.Getresponse(ps)
