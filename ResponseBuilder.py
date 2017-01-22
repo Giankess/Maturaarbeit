@@ -1,39 +1,36 @@
 import time
 import os
+import codecs
 class ResponseBuilder:
     vorlage = ("""{version} {sc}
         Date: {date}
         Server: Python
         Host: {host}
-        {rest}""")
+        {rest}
+        """)
     vorlage2 = """Accept-Ranges: bytes
             Content - Lenght: {size}
             Content-Type: {contenttype}
             """
     def Getresponse(self, ps):
         try:
-            f = open(ps.Path)
             response = self.vorlage.format(version = ps.Version, sc = "200 OK", date =\
                 time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = self.vorlage2.format(size = os.path.getsize(ps.Path), contenttype = ps.Requestinhalt['Content-Type']))
-            file = f.read()
-            file = file.encode(ps.code)
-            response = response.encode("UTF-8")
-            response += file
+            with codecs.open(ps.Path,'r', encoding= 'utf-8') as f:
+                myfile = f.read()
+            response += myfile
             return response
         except FileNotFoundError:
             #auf error-methoden umschalten wenn der Pfad nicht gefunden wird
             request = self.Errorresponse(ps)
             return request
     def Putresponse(self, ps):
-        f = open(ps.Path, w)
-        f.write(Body)
         #response erstellen
         response = self.vorlage.format(version = ps.Version, sc = "201 Created", date =\
             time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = self.vorlage2.format(size = os.path.getsize(ps.Path), contenttype = ps.Requestinhalt['Content-Type']))
-        file = ps.f.read()
-        file = file.encode(ps.code)
-        response = response.encode("UTF-8")
-        response += file
+        with codecs.open(ps.Path, 'r', encoding='utf-8') as f:
+            myfile = f.write(ps.body)
+        response += myfile
         return response
     def Errorresponse(self, ps):
         #Error bei nicht gefundener Datei
@@ -41,7 +38,6 @@ class ResponseBuilder:
             time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = """<html><head><title>Not Found</title></head><body>
 Sorry, the object you requested was not found.
 </body><html>""")
-        response = response.encode("UTF-8")
         return response
     def Errorresponse1(self, ps):
         #Error bei unbekannter Methode
@@ -49,7 +45,6 @@ Sorry, the object you requested was not found.
             time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = """<html><head><title>Not Found</title></head><body>
 Sorry, the object you requested was not found.
 </body><html>""")
-        response = response.encode("UTF-8")
         return response
 
 

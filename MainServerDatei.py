@@ -21,10 +21,11 @@ class httpHandler(socketserver.BaseRequestHandler):
         request = request.decode("UTF-8")
         print(request)
         ps.Parse(request)
-        response = b""
-        response += tm.Switch(ps)
-        print(response)
-        self.request.sendall(response)
+        self.response = ""
+        self.response += tm.Switch(ps)
+        print(self.response)
+        self.response = response.encode('utf-8')
+        self.request.sendall(self.response)
 
 httpd = socketserver.TCPServer(("localhost", PORT), httpHandler)
 #festlegen, worüber der Server läuft
