@@ -24,7 +24,7 @@ class httpHandler(socketserver.BaseRequestHandler):
         self.response = ""
         self.response += tm.Switch(ps)
         print(self.response)
-        self.response = response.encode('utf-8')
+        self.response = self.response.encode('utf-8')
         self.request.sendall(self.response)
 
 httpd = socketserver.TCPServer(("localhost", PORT), httpHandler)
