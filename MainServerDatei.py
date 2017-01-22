@@ -1,7 +1,7 @@
 import socketserver
 import os
-from requestparser import *
-from Testmethode import *
+from RequestParser import *
+from TestMethod import *
 #Bibliotheken importieren
 
 PORT = 8000
@@ -10,8 +10,8 @@ PORT = 8000
 class httpHandler(socketserver.BaseRequestHandler):
     #Allgemeine Variablen für den Handler kommen hier rein
     def handle(self):
-        ps = requestparser()
-        tm = Testmethode()
+        ps = RequestParser()
+        tm = TestMethode()
         request = b''
         while b'\r\n\r\n' not in request:
             data = self.request.recv(1024)
@@ -22,7 +22,7 @@ class httpHandler(socketserver.BaseRequestHandler):
         print(request)
         ps.parse(request)
         response = b""
-        response += tm.Testmethode(ps)
+        response += tm.Testmethod(ps)
         print(response)
         self.request.sendall(response)
 

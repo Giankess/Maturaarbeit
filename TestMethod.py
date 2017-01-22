@@ -1,7 +1,7 @@
-from responsebau import *
-class Testmethode:
-    def Testmethode(self,ps):
-        rb = responsebau()
+from ResponseBuilder import *
+class TestMethod:
+    def TestMethode(self,ps):
+        rb = ResponseBuilder()
         if ps.Method == "GET":
             response = rb.Getresponse(ps)
         elif ps.Method == "PUT":

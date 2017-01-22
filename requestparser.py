@@ -1,4 +1,4 @@
-class requestparser:
+class RequestParser:
     def parse(self,request):
         string = request
         # string in Zeilen spalten

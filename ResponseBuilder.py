@@ -1,5 +1,5 @@
 import time
-class responsebau:
+class ResponseBuilder:
     Vorlage = ("""{version} {sc}
         Date: {date}
         Server: Python
