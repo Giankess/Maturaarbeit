@@ -26,8 +26,10 @@ class RequestParser:
                 self.Body += zeile
         if "Content-Type" in string:
             if "charset" in self.Requestinhalt['Content-Type']:
-                self.contenttype = Requestinhalt['Content-Type'].split('charset=')
-                self.code = string(contenttype[1])
+                self.contenttype = self.Requestinhalt['Content-Type'].split('charset=')
+                self.code = string(self.contenttype[1])
             else:
                 self.code = "utf-8"
-        else: self.code = "utf-8"
+        else:
+            self.code = "utf-8"
+            self.Requestinhalt['Content-Type'] = "undefined"

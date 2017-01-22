@@ -16,7 +16,7 @@ class ResponseBuilder:
             response = self.vorlage.format(version = ps.Version, sc = "200 OK", date =\
                 time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = self.vorlage2.format(size = os.path.getsize(ps.Path), contenttype = ps.Requestinhalt['Content-Type']))
             file = f.read()
-            file = file.encode("'",ps.code,"'")
+            file = file.encode(ps.code)
             response = response.encode("UTF-8")
             response += file
             return response
@@ -31,7 +31,7 @@ class ResponseBuilder:
         response = self.vorlage.format(version = ps.Version, sc = "201 Created", date =\
             time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = self.vorlage2.format(size = os.path.getsize(ps.Path), contenttype = ps.Requestinhalt['Content-Type']))
         file = ps.f.read()
-        file = file.encode("'",ps.code,"'")
+        file = file.encode(ps.code)
         response = response.encode("UTF-8")
         response += file
         return response
