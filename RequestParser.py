@@ -5,6 +5,9 @@ class RequestParser:
         zeilen = string.split('\n')
         self.Requestinhalt = {}
         self.Body = ""
+        self.Method = ""
+        self.Version = ""
+        self.Requestinhalt['Host'] = "localhost:8000"
         #alle Zeilen Parsen
         for zeile in zeilen:
             if ":" in zeile:
