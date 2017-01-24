@@ -2,7 +2,7 @@ class RequestParser:
     def Parse(self,request):
         string = request
         # string in Zeilen spalten
-        zeilen = string.split('\n')
+        zeilen = string.split('\r\n')
         self.Requestinhalt = {}
         self.Body = ""
         self.Method = ""

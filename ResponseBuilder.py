@@ -2,16 +2,8 @@ import time
 import os
 import codecs
 class ResponseBuilder:
-    vorlage = ("""{version} {sc}
-        Date: {date}
-        Server: Python
-        Host: {host}
-        {rest}
-        """)
-    vorlage2 = """Accept-Ranges: bytes
-        Content - Lenght: {size}
-        Content-Type: {contenttype}
-        """
+    vorlage = ("{version} {sc}"+'\r\n'+"Date: {date}"+'\r\n'+"Server: Python"+'\r\n'+"Host: {host}"+'\r\n'+"{rest}"+'\r\n')
+    vorlage2 = ("Accept-Ranges: bytes"+'\r\n'+"Content - Lenght: {size}"+'\r\n'+"Content-Type: {contenttype}"+'\r\n')
     def Getresponse(self, ps):
         try:
             response = self.vorlage.format(version = ps.Version, sc = "200 OK", date =\
@@ -36,17 +28,17 @@ class ResponseBuilder:
         #Error bei nicht gefundener Datei
         response = self.vorlage.format(version = ps.Version, sc = "404 Not Found", date =\
             time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = """
-            <html><head><title>Not Found</title></head><body>
-            Sorry, the object you requested was not found.
-            </body><html>""")
+<html><head><title>Not Found</title></head><body>
+Sorry, the object you requested was not found.
+</body><html>""")
         return response
     def Errorresponse1(self, ps):
         #Error bei unbekannter Methode
         response = self.vorlage.format(version = ps.Version, sc = "501 Not Implemented", date =\
             time.strftime("%a, %d %b %Y %H:%M:%S %Z"), host = ps.Requestinhalt['Host'],rest = """
-            <html><head><title>Not Found</title></head><body>
-            Sorry, the object you requested was not found.
-            </body><html>""")
+<html><head><title>Not Found</title></head><body>
+Sorry, the object you requested was not found.
+</body><html>""")
         return response
 
 
