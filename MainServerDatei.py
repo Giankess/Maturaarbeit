@@ -7,32 +7,40 @@ from TestMethod import *
 PORT = 8000
 #Port festlegen
 #Start Konstruktor
-class httpHandler(socketserver.BaseRequestHandler):
-    #Allgemeine Variablen für den Handler kommen hier rein
+class MyHandler(socketserver.BaseRequestHandler):
+    #Meine Handler Methode
     def handle(self):
+        #Objekte erstellen
         ps = RequestParser()
         tm = SwitchMethod()
+        #Request abspeichern
         request = b''
         while b'\r\n\r\n' not in request:
             data = self.request.recv(1024)
             if not data:
                 break
             request += data
+        #Request dekodieren
         request = request.decode("UTF-8")
         print(request)
+        #Request parsen
         ps.Parse(request)
+        #Request erstellen und abspeichern
         self.response = ""
         self.response += tm.Switch(ps)
         print(self.response)
+        #Response kodieren
         self.response = self.response.encode('utf-8')
+        #Response absenden
         self.request.sendall(self.response)
 
-httpd = socketserver.TCPServer(("localhost", PORT), httpHandler)
 #festlegen, worüber der Server läuft
+httpd = socketserver.TCPServer(("localhost", PORT), MyHandler)
 
-print("serving at port", PORT)
 #Nachricht dass der Server über Port 8000 läuft
+print("serving at port", PORT)
 
-httpd.serve_forever()
 #Lässt Server laufen, bis das Programm beendet wird
+httpd.serve_forever()
+
 

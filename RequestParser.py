@@ -1,9 +1,12 @@
 class RequestParser:
     def Parse(self,request):
+        #Erhaltene Request lokal als String abspeichern
         string = request
         # string in Zeilen spalten
         zeilen = string.split('\r\n')
+        #Dictionary erstellen
         self.Requestinhalt = {}
+        #Variablen definieren
         self.Body = ""
         self.Method = ""
         self.Version = ""
@@ -27,6 +30,7 @@ class RequestParser:
             else:
                 #der Rest ist vom Body
                 self.Body += zeile
+        #Kodierung in der Request suchen und abspeichern
         if "Content-Type" in string:
             if "charset" in self.Requestinhalt['Content-Type']:
                 self.contenttype = self.Requestinhalt['Content-Type'].split('charset=')
